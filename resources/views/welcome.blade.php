@@ -6,6 +6,7 @@
 
         <title>TAXI BOKKO</title>
         <link href="{{ asset('build/assets/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('build/assets/bootstrap.css') }}" rel="stylesheet">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,14 +26,36 @@
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500" id="dash" >Dashboard</a>
                     @else
                         <a href="{{ route('login') }}"  class=" font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"  id="con">Se connecter</a>
-
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" id="en"  class=" ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">S'enregistrer</a>
                         @endif
                     @endauth
                 </div>
             @endif
+            <div class="container col-md-6" >
+                <div class="card"  id="title">
+                <h1 style="border-radius: 1em;  background-color: #ffac3c !important ; color:#14225f;!important;" class="card-header  bg-warning text-center"> <div style=" border-radius:1em; background-color: #fc8f00 !important; font-weight: 500;
+                    "> AVEC TAXI BOKKO VOYAGEZ EN TOUTE SECURITÉ ! </div></h1>
+                <div class="card-body ">
+                    <div class="text-center mb-4">
+                    Que vous soyez client ou chauffeur trouvez ici votre bonheur  !
+                </div> 
+                    <div class="div">
+                    <ol  style="list-style-type:circle" >
 
+                        <li>Creez un compte , choisissez votre statut (Client ou chauffeur ) . </li>
+                        <li>Suivez les directives au niveau de votre dashboard . </li>
+                        <li>Vous avez deja un compte ? Connectez-vous  ! </li>
+
+                  
+                    </ol>
+                </div>
+                </div>
+            </div>
+
+    
+            </div>
         </div>
+
     </body>
 </html>

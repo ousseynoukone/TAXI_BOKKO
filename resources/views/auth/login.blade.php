@@ -2,6 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <div class="container" >
+        <img src="{{ asset('build/img/taxi.png') }}" style="border-radius: 1em;" alt="">
+    </div>
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
