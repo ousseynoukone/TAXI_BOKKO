@@ -3,8 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 return new class extends Migration
 {
@@ -13,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $user = User::create([
-            'prenom' => "Admin",
-            'nom' => "ADMIN",
-            'genre' =>'Homme',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('passer123'),
-        ]);
-        $user->attachRole('admin');
-
+        Schema::create('departements', function (Blueprint $table) {
+            $table->id();
+            $table->string('libelle');
+        });
     }
 
     /**
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('departements');
     }
 };

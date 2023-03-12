@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(LaratrustSeeder::class);
+  //      $this->call(LaratrustSeeder::class);
+    //    $this->call(InsertAdminSeeders::class);
 
     }
 }
