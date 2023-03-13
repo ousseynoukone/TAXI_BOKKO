@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('build/assets/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('build/assets/style.css') }}" rel="stylesheet">
-    
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -22,7 +22,7 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
+                <header class="bg-dark dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -36,12 +36,12 @@
         </div>
     </body>
 </html>
-
+<script src="{{ asset('build/assets/jquery-3.6.0.js') }}"></script>
+<script src="{{ asset('build/assets/bootstrap.js') }}"></script>
 <script src="{{ asset('build/assets/script.js') }}"></script>
 <!--
 <script src="{{ asset('build/assets/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('build/assets/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('build/assets/jquery.dataTables.js') }}"></script> -->
 
-<script src="{{ asset('build/assets/jquery-3.6.0.js') }}"></script>
-<script src="{{ asset('build/assets/bootstrap.js') }}"></script>
+

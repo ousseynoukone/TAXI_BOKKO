@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('montant_gagne');
             $table->string('heure_depart');
             $table->string('heure_arrive');
-            $table->timestamps();
 
         });
     }

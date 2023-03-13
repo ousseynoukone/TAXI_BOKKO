@@ -195,6 +195,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
 
     ],
 
@@ -212,5 +213,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Laratrust' => Laratrust\LaratrustFacade::class,
         ])->toArray(),
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
+
 
 ];

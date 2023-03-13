@@ -8,17 +8,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Region extends Model
 {
-    use HasFactory;
 
+  public     $timestamps = false;
+
+    use HasFactory;
+    
     protected $fillable = [
       'id',
       'libelle',
-      'department_id',
   ];
 
-      public function departments()
+      public function departements()
     {
-        return $this->hasMany(Department::class,"department_id");
+        return $this->hasMany(Departement::class,"region_id");
     }
+
+
 
   }

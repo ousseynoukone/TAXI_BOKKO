@@ -53,7 +53,7 @@
             <x-input-error :messages="$errors->get('tel')" class="mt-2" />
         </div>
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
+            <x-primary-button class="text-dark">{{ __('Enregistrer') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
