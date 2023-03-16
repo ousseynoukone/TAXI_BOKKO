@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use Illuminate\Http\Request;
 
 class JsController extends Controller
@@ -11,7 +12,7 @@ class JsController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -19,7 +20,7 @@ class JsController extends Controller
      */
     public function create()
     {
-        //
+        return (Region::all());
     }
 
     /**
@@ -34,8 +35,9 @@ class JsController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
+    {    
+        
+        return (Region::with('departements')->find($id));
     }
 
     /**
@@ -43,7 +45,7 @@ class JsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return (Region::with('departements')->find($id));
     }
 
     /**

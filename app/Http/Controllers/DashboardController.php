@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use Illuminate\Support\Facades\Auth;
 use Laratrust\Traits\LaratrustUserTrait;
 
@@ -17,12 +18,17 @@ class DashboardController extends Controller
         
         else if(Auth::user()->hasRole('chauffeur'))
         {
-            return view('dashbard.chauffeur_dashboard');
+
+            return redirect()->route('chauffeurs.index');
 
         }
         
         else if (Auth::user()->hasRole('admin'))
-                 return view('dashbard.admin_dashboard');
+        {
+            $regions = Region::all(); 
+            return view('dashbard.admin_dashboard',compact('regions'));
+
+        }
     }
     
 }

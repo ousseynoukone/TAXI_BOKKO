@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('genre');
             $table->string('tel')->nullable();
+            $table->string('voiture')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

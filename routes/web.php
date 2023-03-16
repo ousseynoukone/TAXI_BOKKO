@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\JsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\TrajetController;
@@ -22,6 +24,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 Route::group(['middleware' => ['auth']], function() { 
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
@@ -32,7 +38,17 @@ Route::group(['middleware' => ['auth','role:admin']], function() {
     Route::resource('trajets',TrajetController::class);
     Route::resource('departements',DepartmentController::class);
     Route::resource('regions',RegionController::class);
+    Route::resource('js',JsController::class);
 });
+
+
+
+Route::group(['middleware' => ['auth','role:chauffeur']], function() { 
+    Route::resource('chauffeurs',ChauffeurController::class);
+
+});
+
+
 
 
 /*

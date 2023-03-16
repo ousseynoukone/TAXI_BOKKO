@@ -9,7 +9,7 @@
     <title>TAXI BOKO</title>
 </head>
 <body class="bg-dark">
-    <div class="container" >
+    <div class="container text-color"  >
         @yield('content')
   
       </div>
