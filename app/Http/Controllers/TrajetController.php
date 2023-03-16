@@ -58,8 +58,30 @@ class TrajetController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
+    {   $trajet = new Trajets();
+        $t = Trajets::find($id);
+        $trajet->departement_A =  $t->departement_A->libelle;
+        $trajet->departement_D =  $t->departement_D->libelle;
+        $trajet->region_A =  $t->region_A->libelle;
+        $trajet->region_D =  $t->region_D->libelle;
+        $trajet->clients =  $t->clients;
+        $trajet->chauffeurs =  $t->chauffeurs;
+        $trajet->tarif =  $t->tarif;
+        $trajet->distance =  $t->distance;
+        $trajet->departement_A_id =  $t->departement_A_id;
+        $trajet->departement_D_id =  $t->departement_D_id;
+        $trajet->region_A_id =  $t->region_A_id;
+        $trajet->region_D_id =  $t->region_D_id;
+        $trajet->id =  $t->id;
+        $tabAll = [
+            Region::all(),
+            Departement::all(),
+            $trajet
+        ];
+        
+        
+    
+        return($tabAll) ;
     }
 
     /**
@@ -77,30 +99,25 @@ class TrajetController extends Controller
     {
         $trajet = Trajets::findOrFail($id);
     
-        // Récupérer la région de départ sélectionnée dans la requête
         $region_A_id = $request->get('region_A_id');
     
-        // Récupérer la région d'arrivée sélectionnée dans la requête
         $region_D_id = $request->get('region_D_id');
     
 
     
-        // Vérifier si les départements de départ et d'arrivée sont identiques
         $departement_A_id = $request->get('departement_A_id');
         $departement_D_id = $request->get('departement_D_id');
         if ($departement_D_id == $departement_A_id) {
-            toastr()->error("Le lieu de départ et le lieu d'arrivée ne peuvent pas être identiques", 'Erreur !');
+            toastr()->error("Le departement de départ et le departement d'arrivé ne peuvent pas être identiques", 'Erreur !');
             return redirect()->back();
         }
     
-        // Vérifier si le département de départ appartient à la région de départ sélectionnée
         $region_departement_A = Departement::findOrFail($departement_A_id)->region_id;
         if ($region_departement_A != $region_A_id) {
             toastr()->error("Le département d'arrivée n'appartient pas à la région d'arrivée sélectionnée", 'Erreur !');
             return redirect()->back();
         }
     
-        // Vérifier si le département d'arrivée appartient à la région d'arrivée sélectionnée
         $region_departement_D = Departement::findOrFail($departement_D_id)->region_id;
         if ($region_departement_D != $region_D_id) {
             toastr()->error("Le département de départ n'appartient pas à la région de départ sélectionnée", 'Erreur !');
@@ -108,7 +125,6 @@ class TrajetController extends Controller
             return redirect()->back();
         }
     
-        // Mettre à jour le trajet
         $trajet->update($request->all());
         toastr()->success("Trajet modifié ! ", 'Succès !');
     

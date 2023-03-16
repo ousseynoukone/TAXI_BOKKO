@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
+
+  
     var depId 
     var check = false 
     $('#departement').innerHtml=""
@@ -6,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(){
       //  $('#departement1').html("")
         $('#departement1').html("");
 
-        $('#departement1').append('<option value="">'+ "--Choisir un département--" +'</option>');
+        $('#departement1').append('<option  value="">'+ "--Choisir un département--" +'</option>');
         $('#departement1').attr('disabled', true)
         $('#region1').html("")
         $('#region1').append('<option value="">'+ "--Choisir une région--" +'</option>');
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
                     $('#departement').empty();
                     $('#departement').removeAttr('disabled');
-                    $('#departement').append('<option value="">'+ "--Choisir un département--" +'</option>');
+                    $('#departement').append('<option  value="">'+ "--Choisir un département--" +'</option>');
 
                     data.forEach(departement => {
                         $('#departement').append('<option value="'+ departement.id +'">'+ departement.libelle +'</option>');
@@ -58,7 +60,7 @@ $('#departement').on('change', function() {
 
     $('#departement1').html("");
 
-    $('#departement1').append('<option value="">'+ "--Choisir un département--" +'</option>');
+    $('#departement1').append('<option  value="">'+ "--Choisir un département--" +'</option>');
     $('#departement1').attr('disabled', true)
     $('#region1').html("")
     $('#region1').append('<option value="">'+ "--Choisir une région--" +'</option>');
@@ -118,7 +120,7 @@ $('#region1').on('change', function() {
 
                 $('#departement1').empty();
                 $('#departement1').removeAttr('disabled');
-                $('#departement1').append('<option value="" >'+ "--Choisir un département--" +'</option>');
+                $('#departement1').append('<option  value="" >'+ "--Choisir un département--" +'</option>');
 
                 data.forEach(departement1 => {
 
@@ -288,21 +290,6 @@ document.addEventListener("DOMContentLoaded", function(){
       //  $('#departement1').html("")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         var regionId = $(this).val();
         if(regionId) {
             
@@ -317,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
                     $('#departement_D_id').empty();
                     $('#departement_D_id').removeAttr('disabled');
-                    $('#departement_D_id').append('<option value="">'+ "--Choisir un département--" +'</option>');
+                    $('#departement_D_id').append('<option  value="">'+ "--Choisir un département--" +'</option>');
 
                     data.forEach(departement_D_id => {
                         $('#departement_D_id').append('<option value="'+ departement_D_id.id +'">'+ departement_D_id.libelle +'</option>');
@@ -377,7 +364,7 @@ $('#departement_A_id').innerHtml=""
 $('#region_A_id').on('change', function() {
     $('#departement_A_id').html("");
 
-    $('#departement_A_id').append('<option value="">'+ "--Choisir un département--" +'</option>');
+    $('#departement_A_id').append('<option  value="">'+ "--Choisir un département--" +'</option>');
     $('#departement_A_id').attr('disabled', true)
     var regionId = $(this).val();
     if(regionId) {
@@ -391,7 +378,7 @@ $('#region_A_id').on('change', function() {
 
                 $('#departement_A_id').empty();
                 $('#departement_A_id').removeAttr('disabled');
-                $('#departement_A_id').append('<option value="" >'+ "--Choisir un département--" +'</option>');
+                $('#departement_A_id').append('<option  value="" >'+ "--Choisir un département--" +'</option>');
 
                 data.forEach(departement_A_id => {
 
@@ -462,46 +449,116 @@ $('#region_A_id').on('change', function() {
 
 
 
-id = $('#region_D_id').val()
+// id = $('#region_D_id').val()
 
-id1 = $('#region_A_id').val()
-id1A = $('#departement_A_id').val()
-id1D = $('#departement_D_id').val()
+// id1 = $('#region_A_id').val()
+// id1A = $('#departement_A_id').val()
+// id1D = $('#departement_D_id').val()
 
 
 
-$.ajax({
-    url: '/js/' + id ,
-    type: "GET",
-    dataType: "json",
-    success:function(data) {
-        console.log("suucess")
-        data = data.departements
-        data.forEach(departement_D_id => {
-            if(departement_D_id.id !=id1D)
+// $.ajax({
+//     url: '/js/' + id ,
+//     type: "GET",
+//     dataType: "json",
+//     success:function(data) {
+//         console.log("suucess")
+//         data = data.departements
+//         data.forEach(departement_D_id => {
+//             if(departement_D_id.id !=id1D)
+//             {
+//                 $('#departement_D_id').append('<option value="'+ departement_D_id.id +'">'+ departement_D_id.libelle +'</option>');
+
+//             }
+//              });
+//     },
+// });
+
+
+
+// $.ajax({
+//     url: '/js/' + id1 ,
+//     type: "GET",
+//     dataType: "json",
+//     success:function(data) {
+//         console.log("suucess 2")
+//         data = data.departements
+//         data.forEach(departement_A_id => {
+//             if(departement_A_id.id !=id1A)
+//             {
+//             $('#departement_A_id').append('<option value="'+ departement_A_id.id +'">'+ departement_A_id.libelle +'</option>');
+//             }     
+//         });
+//     },
+// });
+
+
+
+
+
+
+
+function loadTrajet(id) {
+    $('#region_D_id').empty()
+    $('#region_A_id').empty()
+    $('#departement_D_id').empty()
+    $('#departement_A_id').empty()
+    $.ajax({
+      url: '/trajets/' + id,
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        trajet = data[2]
+        departement = data[1]
+        regions = data[0]
+
+
+        trajet.chauffeurs ? $('#chauffeur').val(trajet.chauffeurs) : $('#chauffeur').val('Pas de chauffeur attribué')
+        trajet.clients? $('#client').val(trajet.chauffeur) : $('#client').val('Pas de')
+        $('#distance').val(trajet.distance);
+        $('#tarif').val(trajet.tarif);
+
+        regions.forEach(region => {
+            $('#region_D_id').append('<option '+(trajet.region_D_id==region.id ? "selected" : "" )+'  value="'+ region.id +'">'+ region.libelle +'</option>');
+
+            $('#region_A_id').append('<option '+(trajet.region_A_id==region.id ? "selected" : "" )+'  value="'+ region.id +'">'+ region.libelle +'</option>');
+
+        });
+        departement.forEach(depart =>{
+            console.log(trajet.departement_D_id )
+            console.log(depart.id )
+
+            if(trajet.region_A_id==depart.region_id)
             {
-                $('#departement_D_id').append('<option value="'+ departement_D_id.id +'">'+ departement_D_id.libelle +'</option>');
+                $('#departement_A_id').append('<option '+(trajet.departement_A_id==depart.id ? "selected" : "" )+'  value="'+ depart.id +'">'+ depart.libelle +'</option>');
+
 
             }
-             });
-    },
-});
 
-
-
-$.ajax({
-    url: '/js/' + id1 ,
-    type: "GET",
-    dataType: "json",
-    success:function(data) {
-        console.log("suucess 2")
-        data = data.departements
-        data.forEach(departement_A_id => {
-            if(departement_A_id.id !=id1A)
+            if(trajet.region_D_id==depart.region_id)
             {
-            $('#departement_A_id').append('<option value="'+ departement_A_id.id +'">'+ departement_A_id.libelle +'</option>');
-            }     
-        });
-    },
-});
+                $('#departement_D_id').append('<option '+(trajet.departement_D_id==depart.id ? "selected" : "" )+'  value="'+ depart.id +'">'+ depart.libelle +'</option>');
 
+
+            }
+
+        })
+
+    
+        
+      
+      }
+    });
+    var form = document.getElementById("modifTrajetForm");
+
+    var submitBtn = document.getElementById("submitBtn");
+
+  submitBtn.onclick = function(event) {
+    event.preventDefault();
+    form.action = "/trajets/"+trajet.id
+
+
+    form.submit();
+  };
+  }
+  
