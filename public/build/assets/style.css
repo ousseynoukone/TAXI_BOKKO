@@ -1,0 +1,99 @@
+div#dashcolor {
+
+    background-color: #ffac3c !important ;
+    border-radius: 1em;  
+    
+}
+#dash{
+    color:#14225f;
+    transition: all 0.3s ease-in-out;
+    background-color: #fc8f00;
+    padding: 5px;
+    border-radius: 1em;
+
+}
+
+#con{
+    color:#14225f;
+    transition: all 0.3s ease-in-out;
+    background-color: #fc8f00;
+    padding: 5px;
+    border-radius: 1em;
+
+}
+
+#en{
+    padding: 5px;
+    border-radius: 1em;
+
+    color:#14225f;
+    transition: all 0.3s ease-in-out;
+    background-color: #fc8f00;
+
+
+}
+
+
+#con:hover {
+    background-color: #14225c;
+    color: #ffac3c;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+
+#en:hover {
+    background-color: #14225c;
+    color: #ffac3c;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+
+
+#dash:hover {
+    background-color: #14225c;
+    color: #ffac3c;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+
+#title{
+    background-color: rgba(47, 65, 138, 0.9) !important;
+    color: #ffac3c !important;
+    border-radius: 1em;
+
+  }
+
+
+#myMainContainer{
+    background-color: #502d00;
+}
+
+#myMainContainer1{
+    background-color: #502d00;
+}
+
+.btn{
+    background-color: #a35c00;
+
+}
+.card{
+    background-color: #a35c00;
+
+}
+.text-color{
+    color :#ffffff !important;
+}
+
+#stylebtn{
+    background-color: #a35c00;
+
+}
+
+.btn:hover{
+    background-color: #292928 !important;
+
+}
+
