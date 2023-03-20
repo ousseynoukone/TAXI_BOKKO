@@ -43,8 +43,8 @@
         <!-- Voiture -->
         <div class="mt-2" hidden id="voiture">
             <x-input-label for="voiture" :value="__('Marque de la voiture')" />
-            <x-text-input class="block mt-1 w-full" type="text" name="voiture" :value="old('voiture')" required
-                autofocus />
+            <x-text-input class="block mt-1 w-full" type="text" id="v2" name="voiture" :value="old('voiture')" 
+                 />
             <x-input-error :messages="$errors->get('voiture')" class="mt-2" />
         </div>
 
@@ -118,9 +118,11 @@
             if (document.getElementById('role').value == "chauffeur") {
                 console.log("not hidden")
                 document.getElementById('voiture').removeAttribute("hidden")
+                document.getElementById('v2').setAttribute("required", true)
 
             } else {
                 document.getElementById('voiture').setAttribute("hidden", true)
+                document.getElementById('v2').removeAttribute("required")
 
             }
 

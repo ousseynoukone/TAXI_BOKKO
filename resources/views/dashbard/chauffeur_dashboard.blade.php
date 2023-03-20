@@ -58,6 +58,33 @@ if (Auth::check()) {
                                                 ({{ $trajet->region_D->libelle }})
                                                 ----> {{ $trajet->departement_A->libelle }}
                                                 ({{ $trajet->region_A->libelle }})</h5>
+
+                                                @if($trajet->client_id && $trajet->start==0 && $trajet->chauffeur_id == $u->id )
+                                                @if($trajet->started==1)
+                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Client : </div>
+                                                <div class="card-header">Nom complet : {{$trajet->clients->prenom." ".$trajet->clients->nom}}</div>
+                                                <div class="card-header">Numero de telephone : {{$trajet->clients->tel}}</div>
+                                                @else
+                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Client en attente...</div>
+                                                <div class="card-header">Nom complet : {{$trajet->clients->prenom." ".$trajet->clients->nom}}</div>
+                                                <div class="card-header">Numero de telephone : {{$trajet->clients->tel}}</div>
+                                                @endif
+                                                @endif
+
+                                                @if(( !$trajet->client_id && !$trajet->chauffeur_id == $u->id)  )
+                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Pas de client </div>
+   
+                                                @elseif( $trajet->client_id && !$trajet->chauffeur_id == $u->id )
+                                                    <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Client en attente...</div>
+
+                                                
+                                                @endif
+
+                                                @if(!$trajet->client_id && $trajet->chauffeur_id == $u->id)
+                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Pas de client </div>
+
+                                                @endif
+
                                         </div>
                                         <div class="card-body">
                                             <form method="POST" action="{{ route('chauffeurs.update', $trajet->id) }}">
@@ -67,6 +94,8 @@ if (Auth::check()) {
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="region_D_id">Région de départ</label>
+
+                                                   
 
                                                             <input readonly type="text" min="0.1" step="0.01"
                                                                 class="form-control" id="distance" name="region_D_id"
@@ -121,25 +150,25 @@ if (Auth::check()) {
                                                             class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
                                                             style="    background-color: #e95d00;
                                                     ">
-                                                            Ce trajet vous à  été attribué ! </div>
+                                                            Ce Course vous à  été attribuée ! </div>
                                                             @if ($trajet->start==1)
                                                             <div 
                                                             class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
                                                             style="    background-color: #C95000;
                                                     ">
-                                                            Trajet cours...</div>
+                                                            Course en cours...</div>
                                                             @elseif ($trajet->started==1 &&  $trajet->start==0 )
                                                             <div 
                                                             class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
                                                             style="    background-color: #C95000;
                                                     ">
-                                                            Trajet terminé ! </div>
+                                                            Course terminée ! </div>
                                                             @elseif($trajet->started==0)
                                                             <div 
                                                             class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
                                                             style="    background-color: #C95000;
                                                     ">
-                                                            Trajet pas encore demarré </div>
+                                                            Course pas encore demarrée </div>
                                                             @endif
 
                                                             
@@ -153,7 +182,7 @@ if (Auth::check()) {
                                                     <div 
                                                     class="card card badge-dark text-center mt-2 col-md-7  offset-3"
                                                     style="    background-color: #c92800;
-                                            "> Vous ne pouvez choisir qu'un trajet a la fois
+                                            "> Vous ne pouvez choisir qu'une course a la fois
                                                     </div>
                                                   @endif
 

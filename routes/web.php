@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JsController;
@@ -50,6 +51,10 @@ Route::group(['middleware' => ['auth','role:chauffeur']], function() {
 
 });
 
+Route::group(['middleware' => ['auth','role:client']], function() { 
+    Route::resource('clients',ClientController::class);
+
+});
 
 
 

@@ -29,19 +29,37 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'prenom' => ['required', 'string', 'max:255'],
-            'nom' => ['required', 'string', 'max:255'],
-            'genre' => ['required', 'string', 'max:10'],
-            'age' => ['required', 'integer'],
-            'tel' => ['required', 'string', 'max:14'],
-            'role' => ['required', 'string', 'max:14'],
-            'voiture' => ['required', 'string', 'max:14'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        
-        ]);
+    {   
+        if($request->get('role')=="chauffeur")
+        {
+            $request->validate([
+                'prenom' => ['required', 'string', 'max:255'],
+                'nom' => ['required', 'string', 'max:255'],
+                'genre' => ['required', 'string', 'max:10'],
+                'age' => ['required', 'integer'],
+                'tel' => ['required', 'string', 'max:14'],
+                'role' => ['required', 'string', 'max:14'],
+                'voiture' => [ 'required','string', 'max:14'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            
+            ]);
+
+        }else{
+            $request->validate([
+                'prenom' => ['required', 'string', 'max:255'],
+                'nom' => ['required', 'string', 'max:255'],
+                'genre' => ['required', 'string', 'max:10'],
+                'age' => ['required', 'integer'],
+                'tel' => ['required', 'string', 'max:14'],
+                'role' => ['required', 'string', 'max:14'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            
+            ]);
+
+        }
+
 
         $user = User::create([
             'prenom' => $request->prenom,

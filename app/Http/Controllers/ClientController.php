@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Departement;
-use App\Models\Region;
+
 use App\Models\Trajets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ChauffeurController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,21 +18,20 @@ class ChauffeurController extends Controller
         $tjs = array();
     
         foreach ($trajets as $trajet) {
-            if (!$trajet->chauffeur_id || ($u && $trajet->chauffeur_id == $u->id)) {
+            if (!$trajet->client_id || ($u && $trajet->client_id == $u->id)) {
                 array_push($tjs, $trajet);
             }
         };
     
-        return view('dashbard.chauffeur_dashboard', compact('tjs'));
+        return view('dashbard.client_dashboard', compact('tjs'));
     }
-    
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -48,15 +46,8 @@ class ChauffeurController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {        
-        $trajet = Trajets::find($id);
-
-  
-        $trajet->start = 0;
-        $trajet->update();
-        toastr()->warning('Course terminée ! ', 'Succès !');
-        return (redirect()->route('chauffeurs.index'));
-
+    {
+        //
     }
 
     /**
@@ -64,22 +55,17 @@ class ChauffeurController extends Controller
      */
     public function edit(string $id)
     {
+        $u = Auth::user();
+        
+
         $trajet = Trajets::find($id);
 
-  if($trajet->client_id!=null)
-  {
-    $trajet->start = 1;
-    $trajet->started= 1;
-    $trajet->update();
-    toastr()->success('Course Demarrée ! ', 'Succès !');
-    return (redirect()->route('chauffeurs.index'));
-  }else{
-    toastr()->error("Cette course n'as pas de client ! ", 'Attention !');
-    return (redirect()->route('chauffeurs.index'));
+        $trajet->client_id = null ;
 
-  }
+        $trajet->update();
+        toastr()->warning('Course annulée ! ', 'Succès !');
 
-    }
+        return (redirect()->route('clients.index'));    }    
 
     /**
      * Update the specified resource in storage.
@@ -91,15 +77,12 @@ class ChauffeurController extends Controller
 
         $trajet = Trajets::find($id);
 
-        $trajet->chauffeur_id = $u->id;
+        $trajet->client_id = $u->id;
 
         $trajet->update();
-        toastr()->success('Course attribuée  ! ', 'Succès !');
+        toastr()->success('Course reservée ! ', 'Succès !');
 
-        return (redirect()->route('chauffeurs.index'));
-
-
-    }
+        return (redirect()->route('clients.index'));    }
 
     /**
      * Remove the specified resource from storage.

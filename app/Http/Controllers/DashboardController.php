@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public  function index()
     { 
         if(Auth::user()->hasRole('client')){
-            return view('dashbard.client_dashboard');
+            return redirect()->route('clients.index');
         }
         
         else if(Auth::user()->hasRole('chauffeur'))
