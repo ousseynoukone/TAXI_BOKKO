@@ -57,7 +57,7 @@
                             <th>Nom</th>
                             <th>Email</th>
                             <th>Telephone</th>
-                            <th>Modele du voiture</th>
+                            <th>Marque de la  voiture</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>

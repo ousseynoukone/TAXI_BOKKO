@@ -18,12 +18,15 @@ if (Auth::check()) {
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="card-header card font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("Bienvenue :  $u->prenom $u->nom ") }}
         </h2>
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="card-header card text-center font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("Statut : $role ") }}
         </h2>
+        <h6 class="card-header text-color card text-center" >
+            {{ __("Marque de la voiture :  $u->voiture") }}
+        </h6>
     </x-slot>
 
     <div class="py-12">
