@@ -102,6 +102,7 @@ class TrajetController extends Controller
         $region_A_id = $request->get('region_A_id');
     
         $region_D_id = $request->get('region_D_id');
+        
     
 
     

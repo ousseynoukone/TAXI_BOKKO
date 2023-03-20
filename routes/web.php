@@ -7,6 +7,7 @@ use App\Http\Controllers\JsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\TrajetController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth','role:admin']], function() {
     Route::resource('departements',DepartmentController::class);
     Route::resource('regions',RegionController::class);
     Route::resource('js',JsController::class);
+    Route::resource('users',UserController::class);
 });
 
 

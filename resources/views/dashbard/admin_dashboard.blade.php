@@ -16,7 +16,8 @@ $role = $u->roles[0]['description'];
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("Statut : $role ") }}
         </h2>
-        <a href="{{route('regions.index')}}" class="btn  btn-dark   col-md-4 offset-8 "  style="width: 15rem; color: #fcfcfc">CRUD REGION/DEPARTMENT</a>
+        <a href="{{route('regions.index')}}" class="btn  btn-dark   col-md-4 offset-8 "  style="width: 15rem; color: #fcfcfc">CRUD Region/Departement</a>
+        <a href="{{route('users.index')}}" class="btn  btn-dark   col-md-4 offset-8 "  style="width: 15rem; color: #fcfcfc">Les Utilisateurs</a>
 
     </x-slot>
 
@@ -93,7 +94,7 @@ $role = $u->roles[0]['description'];
 
                                   <div class="form-group">
                                     <label for="distance">Saisir le tarif  par Kilometre :</label>
-                                    <input type="text" disabled required class="form-control" min="200" max="1000" id="tf"  placeholder="Entrez la distance en kilomètres">
+                                    <input type="text" disabled required class="form-control" min="200" max="1000" id="tf"  placeholder="Saisir le tarif  par Kilometre ">
                                   </div>
 
                                   <div class="form-group">

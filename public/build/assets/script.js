@@ -516,7 +516,7 @@ function loadTrajet(id) {
         trajet.chauffeurs ? $('#chauffeur').val(trajet.chauffeurs) : $('#chauffeur').val('Pas de chauffeur attribué')
         trajet.clients? $('#client').val(trajet.chauffeur) : $('#client').val('Pas de')
         $('#distance').val(trajet.distance);
-        $('#tarif').val(trajet.tarif);
+        $('#tarifModif').val(trajet.tarif);
 
         regions.forEach(region => {
             $('#region_D_id').append('<option '+(trajet.region_D_id==region.id ? "selected" : "" )+'  value="'+ region.id +'">'+ region.libelle +'</option>');
@@ -553,12 +553,46 @@ function loadTrajet(id) {
 
     var submitBtn = document.getElementById("submitBtn");
 
+
+
   submitBtn.onclick = function(event) {
     event.preventDefault();
+
+    
     form.action = "/trajets/"+trajet.id
 
-
+    if(controls())
     form.submit();
+
   };
+  }
+
+
+  function controls() {
+    distance = $('#distance').val()
+    tarif = $('#tarifModif').val()
+
+    const DistancePattern = /^0\.[1-9]\d*|[1-9]\d*(\.\d+)?$/;
+    const TarifPattern = /^0\.[1-9]\d*|[1-9]\d*(\.\d+)?$/;
+
+
+    if (!DistancePattern.test(distance)) {
+        $('#distance_error').removeAttr("hidden")
+      }else{
+        $('#distance_error').attr("hidden",true)
+
+      }
+
+
+      if (!TarifPattern.test(tarif)) {
+        $('#tarif_error').removeAttr("hidden")
+      }else{
+        $('#tarif_error').attr("hidden",true)
+
+      }
+
+    return (DistancePattern.test(distance) && TarifPattern.test(tarif))
+   
+    
   }
   

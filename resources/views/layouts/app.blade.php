@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('build/assets/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('build/assets/style.css') }}" rel="stylesheet">
-
+            
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -39,6 +39,8 @@
 <script src="{{ asset('build/assets/jquery-3.6.0.js') }}"></script>
 <script src="{{ asset('build/assets/bootstrap.js') }}"></script>
 <script src="{{ asset('build/assets/script.js') }}"></script>
+<script src="{{ asset('build/assets/jquery-3.6.0.js') }}"></script>
+
 <!--
 <script src="{{ asset('build/assets/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('build/assets/dataTables.bootstrap4.js') }}"></script>

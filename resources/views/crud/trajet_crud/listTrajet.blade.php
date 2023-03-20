@@ -108,7 +108,7 @@
                                         
                                         <div class="form-group">
                                             <label for="distance">Distance (km)</label>
-                                            <input type="number" min="0.1" step="0.01" class="form-control" id="" name="distance" value="{{ $trajet->distance }}">
+                                            <input readonly type="number" min="0.1" step="0.01" class="form-control" id="" name="distance" value="{{ $trajet->distance }}">
 
                                         </div>
                                   
@@ -118,8 +118,8 @@
                            
                                         <div class="form-group">
                                             <label for="prix">Prix (CFA)</label>
-                                            <input type="text" value="{{ $trajet->tarif }}" class="form-control"
-                                                id="" name="tarif" pattern="[0-9]+([,.][0-9]+)?">
+                                            <input type="number" value="{{ $trajet->tarif }}" class="form-control"
+                                                id="" name="tarif" min="500" max="100000" pattern="[0-9]+([,.][0-9]+)?"> 
                                         </div>
                                             
 
@@ -216,6 +216,7 @@
                         <div class="form-group">
                             <label for="distance">Distance (km)</label>
                             <input type="number" required    min="0.1" step="0.01" class="form-control" id="distance" name="distance" value="">
+                            <div id="distance_error" class="alert text-color text-center   alert-danger " hidden style="background-color: #790404 !important;">Valeur invalide !</div>
 
                         </div>
                   
@@ -225,7 +226,9 @@
            
                         <div class="form-group">
                             <label for="prix">Prix (CFA)</label>
-                            <input type="text" value="" class="form-control" id="tarif"  >
+                            <input type="text" name="tarif" required value="" class="form-control" id="tarifModif"  >
+                            <div id="tarif_error" hidden class="alert text-color text-center hidden  alert-danger " style="background-color: #790404 !important;">Valeur invalide !</div>
+
                         </div>
                             
 
