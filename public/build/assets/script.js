@@ -596,3 +596,17 @@ function loadTrajet(id) {
     
   }
   
+
+
+  //Ajout
+
+
+
+
+
+
+  document.addEventListener("DOMContentLoaded", function(){
+    setInterval(function() {
+        $('#myMainContainer1').load(window.location.href + ' #myMainContainer1');
+    }, 3000);
+});
