@@ -607,6 +607,15 @@ function loadTrajet(id) {
 
   document.addEventListener("DOMContentLoaded", function(){
     setInterval(function() {
-        $('#myMainContainer1').load(window.location.href + ' #myMainContainer1');
+        $.ajax({
+            url: window.location.href,
+            type: 'GET',
+            dataType: 'html',
+            success: function(response) {
+                var myMainContainer1Contenu = $(response).find('#myMainContainer1').html();
+                $('#myMainContainer1').html(myMainContainer1Contenu);
+            }
+        });
     }, 3000);
+    
 });

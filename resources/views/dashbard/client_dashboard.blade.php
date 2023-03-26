@@ -1,25 +1,23 @@
-<?php 
+<?php
 
 if (Auth::check()) {
-
-$u  = Auth::user();
-$role = $u->roles[0]['description'];
-
+    $u = Auth::user();
+    $role = $u->roles[0]['description'];
 }
 ?>
+ @php $checkIfReservedButNotStarted = false;  @endphp
+ @php $checkIfReservedButStarted = false;  @endphp
+
 
 @php
-    $checkTrajet = false;
-    foreach ($tjs as     $trajet) {
-        if ($trajet->client_id == $u->id) {
-            $checkTrajet = true;
-            break;
-        }
-    }
+
+    
+    $check = false;
+    $check1 = false;
 @endphp
 
 <x-app-layout>
-    
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("Bienvenue :  $u->prenom $u->nom ") }}
@@ -32,24 +30,180 @@ $role = $u->roles[0]['description'];
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+
                 <div class="container" id="myMainContainer1">
 
-                    <div class="container">
-
-                        <div class="row">
-                            <div class="col-12">
-
-                            </div>
+                    <div class="row ">
+                        <div class="container col-md-6">
                             @if (count($tjs) == 0)
                                 <div class="card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                    style="background-color: #a35c00 !important;">Il n'y a aucun trajet disponible
+                                    style="background-color: #a35c00 !important;">Aucun trajet disponible
                                 </div>
                             @else
                                 <div class="card-header col-md-12 text-color text-center"
-                                    style="background-color: #a35c00 !important;">Choisir un trajet </div>
+                                    style="background-color: #a35c00 !important;">Trajet(s) selectionée(s)</div>
                             @endif
                             @foreach ($tjs as $trajet)
-                                <div class="col-md-7 offset-md-3 mt-2 text-color">
+                                @if ($trajet->client_id == $u->id)
+                                    @php $check1 = true ; @endphp
+                                    <div class="col-md-12  mt-2 text-color">
+
+                                        <div class="card">
+                                            <div class="card-header text-white"
+                                                style="background-color: rgb(201, 80, 0)">
+                                                <h5 class="card-title text-center mb-0">
+                                                    {{ $trajet->departement_D->libelle }}
+                                                    ({{ $trajet->region_D->libelle }})
+                                                    ----> {{ $trajet->departement_A->libelle }}
+                                                    ({{ $trajet->region_A->libelle }})</h5>
+
+                                                @if (!$trajet->chauffeur_id)
+                                                    <div class="card-header mt-2 badge-danger text-warning text-center"
+                                                        style="width: 13rem; background-color:rgb(0, 35, 133)">Pas de
+                                                        chauffeur</div>
+                                                @elseif($trajet->client_id == $u->id)
+                                                    <div class="card-header mt-2 badge-danger text-warning text-center"
+                                                        style="width: 13rem; background-color:rgb(0, 35, 133)">Chauffeur
+                                                        : </div>
+                                                    <div class="card-header">Nom complet :
+                                                        {{ $trajet->chauffeurs->prenom . ' ' . $trajet->chauffeurs->nom }}
+                                                    </div>
+                                                    <div class="card-header">Numero de telephone :
+                                                        {{ $trajet->chauffeurs->tel }}</div>
+                                                @endif
+
+                                                @if ($trajet->chauffeur_id && !$trajet->client_id)
+                                                    <div class="card-header mt-2 badge-danger text-warning text-center"
+                                                        style="width: 13rem; background-color:rgb(0, 35, 133)">Chauffeur
+                                                        en attente...</div>
+                                                @endif
+
+                                            </div>
+
+
+                                            <div class="card-body">
+                                               
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="region_D_id">Région de départ</label>
+
+                                                                <input readonly type="text" min="0.1"
+                                                                    step="0.01" class="form-control" id="distance"
+                                                                    name="region_D_id"
+                                                                    value="{{ $trajet->region_D->libelle }}">
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="departement_D_id">Département de
+                                                                    départ</label>
+
+                                                                <input readonly type="text" min="0.1"
+                                                                    step="0.01" class="form-control" id="distance"
+                                                                    name="departement_D_id"
+                                                                    value="{{ $trajet->departement_D->libelle }}">
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="distance">Distance (km)</label>
+                                                                <input readonly type="number" min="0.1"
+                                                                    step="0.01" class="form-control" id="distance"
+                                                                    name="distance" value="{{ $trajet->distance }}">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="region_A_id">Région d'arrivée</label>
+                                                                <input readonly type="text"
+                                                                    value="{{ $trajet->region_A->libelle }}"
+                                                                    class="form-control" id="region_A_id"
+                                                                    name="region_A_id">
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="departement_A_id">Département
+                                                                    d'arrivée</label>
+                                                                <input readonly type="text"
+                                                                    value="{{ $trajet->departement_A->libelle }}"
+                                                                    class="form-control" id="departement_A_id"
+                                                                    name="departement_A_id">
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="prix">Prix (CFA)</label>
+                                                                <input readonly type="text"
+                                                                    value="{{ $trajet->tarif }}" class="form-control"
+                                                                    id="prix" name="tarif"
+                                                                    pattern="[0-9]+([,.][0-9]+)?">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">
+                                                        @if ($trajet->client_id == $u->id)
+                                                            @if ($trajet->start == 0 && $trajet->started == 0)
+                                                                <div class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
+                                                                    style="    background-color: #e95d00;
+                                                ">
+                                                                    Course reservée </div>
+                                                            @endif
+                                                            @if ($trajet->start == 1)
+                                                                <div class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
+                                                                    style="    background-color: #C95000;
+                                                ">
+                                                                    Course en cours...</div>
+                                                            @elseif ($trajet->started == 1 && $trajet->start == 0)
+                                                                <div class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
+                                                                    style="    background-color: #C95000;
+                                                ">
+                                                                    Course terminée ! </div>
+                                                            @elseif($trajet->started == 0)
+                                                                <div class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
+                                                                    style="    background-color: #C95000;
+                                                ">
+                                                                    Course pas encore demarrée </div>
+                                                            @endif
+                                                        @endif
+
+                                                <form method="get" action="{{ route('clients.edit', $trajet->id) }}">
+
+                                                    @if ($trajet->start == 0 && $trajet->client_id == $u->id && $trajet->chauffeur_id == null)
+                                                        <button type="submit"
+                                                            class="btn btn-warning text-color mt-3  ml-3">Annuler</button>
+                                                    @endif
+                                                </form>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        @if ($check1 == false)
+                            <div class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
+                                style="    background-color: #C95000;
+            ">
+                                Aucune course selectionnée </div>
+                        @endif
+                    </div>
+
+                    <div class="container col-md-6 ">
+
+                        @if (count($tjs) == 0)
+                            <div class="card-header mt-4 col-md-12 text-center text-color bg-secondary"
+                                style="background-color: #a35c00 !important;">Il n'y a aucun trajet disponible
+                            </div>
+                        @else
+                            <div class="card-header col-md-12 text-color text-center"
+                                style="background-color: #a35c00 !important;">Liste des trajets </div>
+                        @endif
+                        @foreach ($tjs as $trajet)
+                            @if ($trajet->client_id != $u->id)
+                                @php $check=true;  @endphp
+
+                                <div class="col-md-12  mt-2 text-color">
 
                                     <div class="card">
                                         <div class="card-header text-white" style="background-color: rgb(201, 80, 0)">
@@ -59,19 +213,26 @@ $role = $u->roles[0]['description'];
                                                 ----> {{ $trajet->departement_A->libelle }}
                                                 ({{ $trajet->region_A->libelle }})</h5>
 
-                                                @if(!$trajet->chauffeur_id)
-                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Pas de chauffeur</div>
-                                                @elseif($trajet->client_id == $u->id )
-                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Chauffeur : </div>
-                                                <div class="card-header">Nom complet : {{$trajet->chauffeurs->prenom." ".$trajet->chauffeurs->nom}}</div>
-                                                <div class="card-header">Numero de telephone : {{$trajet->chauffeurs->tel}}</div>
-        
-                                                @endif
+                                            @if (!$trajet->chauffeur_id)
+                                                <div class="card-header mt-2 badge-danger text-warning text-center"
+                                                    style="width: 13rem; background-color:rgb(0, 35, 133)">Pas de
+                                                    chauffeur</div>
+                                            @elseif($trajet->client_id == $u->id)
+                                                <div class="card-header mt-2 badge-danger text-warning text-center"
+                                                    style="width: 13rem; background-color:rgb(0, 35, 133)">Chauffeur :
+                                                </div>
+                                                <div class="card-header">Nom complet :
+                                                    {{ $trajet->chauffeurs->prenom . ' ' . $trajet->chauffeurs->nom }}
+                                                </div>
+                                                <div class="card-header">Numero de telephone :
+                                                    {{ $trajet->chauffeurs->tel }}</div>
+                                            @endif
 
-                                                @if($trajet->chauffeur_id && !$trajet->client_id)
-                                                <div class="card-header mt-2 badge-danger text-warning text-center" style="width: 13rem; background-color:rgb(0, 35, 133)">Chauffeur en attente...</div>
-
-                                                @endif
+                                            @if ($trajet->chauffeur_id && !$trajet->client_id)
+                                                <div class="card-header mt-2 badge-danger text-warning text-center"
+                                                    style="width: 13rem; background-color:rgb(0, 35, 133)">Chauffeur en
+                                                    attente...</div>
+                                            @endif
 
                                         </div>
 
@@ -85,25 +246,26 @@ $role = $u->roles[0]['description'];
                                                         <div class="form-group">
                                                             <label for="region_D_id">Région de départ</label>
 
-                                                            <input readonly type="text" min="0.1" step="0.01"
-                                                                class="form-control" id="distance" name="region_D_id"
+                                                            <input readonly type="text" min="0.1"
+                                                                step="0.01" class="form-control" id="distance"
+                                                                name="region_D_id"
                                                                 value="{{ $trajet->region_D->libelle }}">
 
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="departement_D_id">Département de départ</label>
 
-                                                            <input readonly type="text" min="0.1" step="0.01"
-                                                                class="form-control" id="distance"
+                                                            <input readonly type="text" min="0.1"
+                                                                step="0.01" class="form-control" id="distance"
                                                                 name="departement_D_id"
                                                                 value="{{ $trajet->departement_D->libelle }}">
 
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="distance">Distance (km)</label>
-                                                            <input readonly type="number" min="0.1" step="0.01"
-                                                                class="form-control" id="distance" name="distance"
-                                                                value="{{ $trajet->distance }}">
+                                                            <input readonly type="number" min="0.1"
+                                                                step="0.01" class="form-control" id="distance"
+                                                                name="distance" value="{{ $trajet->distance }}">
 
                                                         </div>
                                                     </div>
@@ -126,78 +288,62 @@ $role = $u->roles[0]['description'];
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="prix">Prix (CFA)</label>
-                                                            <input readonly type="text" value="{{ $trajet->tarif }}"
-                                                                class="form-control" id="prix" name="tarif"
+                                                            <input readonly type="text"
+                                                                value="{{ $trajet->tarif }}" class="form-control"
+                                                                id="prix" name="tarif"
                                                                 pattern="[0-9]+([,.][0-9]+)?">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row ">
-                                                    @if ($trajet->client_id == $u->id)
-                                                            @if ($trajet->start==0 && $trajet->started==0  )
-                                                            <div 
-                                                            class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
-                                                            style="    background-color: #e95d00;
-                                                    "> 
-                                                            Course reservée </div>
-                                                            @endif
-                                                            @if ($trajet->start==1)
-                                                            <div 
-                                                            class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
-                                                            style="    background-color: #C95000;
-                                                    ">
-                                                            Course en  cours...</div>
-                                                            @elseif ($trajet->started==1 &&  $trajet->start==0 )
-                                                            <div 
-                                                            class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
-                                                            style="    background-color: #C95000;
-                                                    ">
-                                                            Course terminée ! </div>
-                                                            @elseif($trajet->started==0)
-                                                            <div 
-                                                            class="card-header card badge-dark text-center mt-2 col-md-6  offset-3"
-                                                            style="    background-color: #C95000;
-                                                    ">
-                                                            Course pas encore demarrée </div>
-                                                            @endif
 
-                                                            
-                                                    @elseif(!$checkTrajet ||  $trajet->started==0  )
-                                                   
+                                                    @foreach ($tjs as $trajet)
+                                                        @if ($trajet->client_id == $u->id && $trajet->start == 1)
+                                                            <div class="card card badge-dark text-center mt-2 col-md-8 offset-2"
+                                                                style="background-color: #c92800;">
+                                                                @php $checkIfReservedButStarted = true;  @endphp
 
-                                                    <button type="submit"
-                                                        class="btn btn-primary mt-2 col-md-4 offset-4">Choisir</button>
-                                                    @else
+                                                                Vous avez déjà un trajet en cours. Vous ne pouvez pas
+                                                                réserver un autre trajet pour le moment.
+                                                            </div>
+                                                        @break
 
-                                                    <div 
-                                                    class="card card badge-dark text-center mt-2 col-md-8  offset-2"
-                                                    style="    background-color: #c92800;
-                                            "> Vous ne pouvez reserver qu'une course  a la fois
-                                                    </div>
-                                                  @endif
+                                                    @elseif ($trajet->client_id == $u->id && $trajet->started == 0 && $trajet->start == 0)
+                                                        <div class="card card badge-dark text-center mt-2 col-md-8 offset-2"
+                                                            style="background-color: #c92800;">
+                                                            @php $checkIfReservedButNotStarted = true;  @endphp
+                                                            Vous avez déjà réservé un trajet qui n'a pas encore
+                                                            démarré. Vous ne pouvez pas réserver un autre trajet
+                                                            pour le moment.
+                                                        </div>
+                                                    @break
 
-                                            </form>
+                                                @elseif ($trajet->client_id == $u->id && $trajet->started == 0)
+                                                    <?php $checkTrajet = true; ?>
+                                                @endif
+                                            @endforeach
 
-                                            <form method="get" action="{{ route('clients.edit', $trajet->id) }}">
-                                                @if ($trajet->start==0  && $trajet->client_id==$u->id && $trajet->chauffeur_id==null  )
-                                                    
-                                            <button type="submit"
-                                            class="btn btn-warning text-color mt-3  ml-3">Annuler</button>
-
+                                            @if ( $checkIfReservedButNotStarted != true &&  $checkIfReservedButStarted !=true )
+                                                <button type="submit"
+                                                    class="btn btn-primary mt-2 col-md-4 offset-4">Choisir</button>
                                             @endif
 
-                                            </form>
 
-                                  
+                                    </form>
 
-                                        </div>
-                                    </div>
+
+
+
                                 </div>
+                            </div>
                         </div>
-                        @endforeach
-                    </div>
-                </div>
             </div>
+            @endif
+            @endforeach
+
         </div>
     </div>
+</div>
+</div>
+</div>
 </x-app-layout>

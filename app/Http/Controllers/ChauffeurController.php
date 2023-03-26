@@ -15,7 +15,8 @@ class ChauffeurController extends Controller
     public function index()
     {
         $u = Auth::user();
-        $trajets = Trajets::all();
+        $trajets = Trajets::orderBy('start', 'desc')->orderBy('started', 'asc')->get();
+        //dd($trajets);
         $tjs = array();
     
         foreach ($trajets as $trajet) {
@@ -51,7 +52,6 @@ class ChauffeurController extends Controller
     {        
         $trajet = Trajets::find($id);
 
-  
         $trajet->start = 0;
         $trajet->update();
         toastr()->warning('Course terminée ! ', 'Succès !');

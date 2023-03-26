@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $u = Auth::user();
-        $trajets = Trajets::all();
+        $trajets = Trajets::orderBy('start', 'desc')->orderBy('started', 'asc')->get();
         $tjs = array();
     
         foreach ($trajets as $trajet) {

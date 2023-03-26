@@ -7,7 +7,7 @@
         <link href="{{ asset('build/assets/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('build/assets/style.css') }}" rel="stylesheet">
             
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>TAXI BOKO</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
