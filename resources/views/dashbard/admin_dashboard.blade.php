@@ -89,7 +89,7 @@ $role = $u->roles[0]['description'];
                             <div class="container col-md-4 mt-1 text-color">
                                 <div class="form-group ">
                                     <label for="distance">Saisir la distance en kilomètres :</label>
-                                    <input type="text" required class="form-control" id="distance" name="distance" placeholder="Entrez la distance en kilomètres">
+                                    <input type="text" required class="form-control" id="distance" name="distance" min="1" placeholder="Entrez la distance en kilomètres">
                                   </div>
 
                                   <div class="form-group">
@@ -99,7 +99,7 @@ $role = $u->roles[0]['description'];
 
                                   <div class="form-group">
                                     <label for="distance">Tarif : </label>
-                                    <input type="text"  placeholder="Tarif en CFA" readonly required class="form-control" min="200" max="1000" id="tarif" name="tarif" required>
+                                    <input type="text"  placeholder="Tarif en CFA" readonly required class="form-control" id="tarif" name="tarif" required>
                                   </div>
                                   
                                 <button type="submit" id="stylebtn" class="btn bn-dark  mb-2 ml-2 mt-5 text-color  btn btn-dark">Ajouter ce trajet </button>

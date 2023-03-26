@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout >
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -6,7 +6,7 @@
         <img src="{{ asset('build/img/taxi.png') }}" style="border-radius: 1em;" alt="">
     </div>
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" >
         @csrf
 
         <!-- Email Address -->
@@ -42,6 +42,8 @@
                     {{ __('Mots de passe oublié ?') }}
                 </a>
             @endif
+
+            <a href="{{ route('register') }}" id="en"  class="bg-white bg-opacity-50 text-indigo-500 hover:bg-gray-200 px-3 py-1 rounded ml-2">S'enregistrer</a>
 
             <x-primary-button class="ml-3">
                 {{ __('Se connecter') }}

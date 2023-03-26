@@ -97,3 +97,15 @@ div#dashcolor {
 
 }
 
+
+
+#btnMotal:hover{
+    background-color:#05004e !important;
+    color:white !important;
+
+}
+
+#btnMotal{
+    color:#05004e !important;;
+
+}

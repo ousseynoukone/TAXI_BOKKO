@@ -26,6 +26,7 @@ return new class extends Migration
             $table->float('tarif');
             $table->boolean('start')->default(0);
             $table->boolean('started')->default(0);
+            $table->boolean('endnotif')->default(0);
              
         }) ;
     }

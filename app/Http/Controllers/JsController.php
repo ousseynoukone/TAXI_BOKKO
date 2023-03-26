@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Region;
+use App\Models\Trajets;
 use Illuminate\Http\Request;
 
 class JsController extends Controller
@@ -12,6 +13,7 @@ class JsController extends Controller
      */
     public function index()
     {
+
         
     }
 

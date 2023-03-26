@@ -23,6 +23,7 @@ class Trajets extends Model
       'tarif',
       'start',
       'started',
+      'endnotif',
   ];
 
 

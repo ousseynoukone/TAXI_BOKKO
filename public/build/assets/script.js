@@ -196,6 +196,41 @@ $('#tf').on('input', function() {
 
 
 
+
+
+
+
+
+
+  $('#tf').on('input', function() {
+    var inputVal = $(this).val();
+    
+    var regex = /^0[0-9]*$/;
+    
+    if (regex.test(inputVal)) {
+      $(this).val('');
+    }
+  });
+  
+
+  
+  $('#distance').on('input', function() {
+    var inputVal = $(this).val();
+    
+    var regex = /^0[0-9]*$/;
+    
+    if (regex.test(inputVal)) {
+      $(this).val('');
+    }
+  });
+  
+
+
+
+
+
+
+
   $('#distance').on('input', function() {
     var inputVal = $(this).val();
 
@@ -614,8 +649,121 @@ function loadTrajet(id) {
             success: function(response) {
                 var myMainContainer1Contenu = $(response).find('#myMainContainer1').html();
                 $('#myMainContainer1').html(myMainContainer1Contenu);
+
             }
         });
     }, 3000);
     
 });
+
+
+
+
+
+if( $('#check').val()==1)
+{
+
+
+//Systeme de notification pour le chauffeur
+document.addEventListener("DOMContentLoaded", function(){
+    notif=0
+    setInterval(function() {
+        $.ajax({
+            url: "/chauffeurs/create",
+            type: 'GET',
+            
+            success: function(response) {
+                trajets = response[0]
+                u = response[1]
+
+                trajets.forEach(trajet => {
+                    if(trajet.client_id!=null && trajet.chauffeur_id == u.id && trajet.started==0 && notif==0 &&trajet.start==0 )
+                    {
+                        $('#modalMessage').text("Un client vous a été attribuer ! ")
+                        document.getElementById("notifBtnForModal").click();
+                        notif=1
+
+                    }
+                  
+
+                    if(trajet.client_id!=null && trajet.chauffeur_id == null && notif!=2  )
+                    { 
+                        console.log(trajet)
+
+                        $('#modalTitle').text("Un client  a reserver le trajet suivant : ") 
+                        $('#modalMessage').text(trajet.departement_D+"("+trajet.region_D+")"+" --> "+trajet.departement_A+"("+trajet.region_A+")")
+                        document.getElementById("notifBtnForModal").click();
+                        notif=2
+
+                    }
+
+
+
+                    
+
+
+                    
+                });
+            
+             
+            }
+        });
+    }, 3000);
+    
+});
+
+}
+
+
+
+
+if( $('#check').val()==2){
+//Systeme de notification pour le client
+document.addEventListener("DOMContentLoaded", function(){
+    notif=0
+    setInterval(function() {
+        $.ajax({
+            url: "/clients/create",
+            type: 'GET',
+            
+            success: function(response) {
+                trajets = response[0]
+                u = response[1]
+                console.log(response)
+
+                trajets.forEach(trajet => {
+                    if(trajet.client_id==u.id && trajet.chauffeur_id != null && trajet.start!=1  && trajet.started==1 && trajet.endnotif==0 )
+                    {  
+                        $('#modalTitle').text("Course terminée ! ") 
+                        document.getElementById("notifBtnForModal").click();
+
+                        $.ajax({
+                            url: "/clients/"+trajet.id,
+                            type: 'GET',
+                            
+                            success: function(response) {
+
+                            }
+                        
+                        })
+                        
+
+                    }
+
+                    if(trajet.client_id == u.id && trajet.chauffeur_id!=null && trajet.start==0 && trajet.started==0 && notif==0){
+                        $('#modalTitle').text("Un chauffeur vous a été attribuer ! ") 
+                        document.getElementById("notifBtnForModal").click();
+                        notif = 1
+                    }
+                  
+
+                    
+                });
+            
+             
+            }
+        });
+    }, 3000);
+    
+});
+}

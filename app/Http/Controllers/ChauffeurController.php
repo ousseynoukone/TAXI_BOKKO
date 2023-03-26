@@ -34,7 +34,34 @@ class ChauffeurController extends Controller
      */
     public function create()
     {
-        //
+        $tr = Trajets::all();
+        $trajets = [];
+        foreach ($tr as $t ) {
+            $trajet = new Trajets();
+
+            $trajet->departement_A =  $t->departement_A->libelle;
+            $trajet->departement_D =  $t->departement_D->libelle;
+            $trajet->region_A =  $t->region_A->libelle;
+            $trajet->region_D =  $t->region_D->libelle;
+            $trajet->clients =  $t->clients;
+            $trajet->chauffeurs =  $t->chauffeurs;
+            $trajet->tarif =  $t->tarif;
+            $trajet->distance =  $t->distance;
+            $trajet->departement_A_id =  $t->departement_A_id;
+            $trajet->departement_D_id =  $t->departement_D_id;
+            $trajet->region_A_id =  $t->region_A_id;
+            $trajet->region_D_id =  $t->region_D_id;
+            $trajet->id =  $t->id;  
+            $trajet->start =  $t->start;  
+            $trajet->started =  $t->started;  
+            $trajet->client_id =  $t->client_id;  
+            $trajet->chauffeur_id =  $t->chauffeur_id;  
+            $trajets [] = $trajet;    
+          }
+    
+
+        return [$trajets,Auth::user()];
+
     }
 
     /**

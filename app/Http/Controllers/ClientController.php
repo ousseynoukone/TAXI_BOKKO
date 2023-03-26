@@ -22,6 +22,8 @@ class ClientController extends Controller
                 array_push($tjs, $trajet);
             }
         };
+
+
     
         return view('dashbard.client_dashboard', compact('tjs'));
     }
@@ -31,7 +33,35 @@ class ClientController extends Controller
      */
     public function create()
     {
-        
+        $tr = Trajets::all();
+        $trajets = [];
+        foreach ($tr as $t ) {
+            $trajet = new Trajets();
+
+            $trajet->departement_A =  $t->departement_A->libelle;
+            $trajet->departement_D =  $t->departement_D->libelle;
+            $trajet->region_A =  $t->region_A->libelle;
+            $trajet->region_D =  $t->region_D->libelle;
+            $trajet->clients =  $t->clients;
+            $trajet->chauffeurs =  $t->chauffeurs;
+            $trajet->tarif =  $t->tarif;
+            $trajet->distance =  $t->distance;
+            $trajet->departement_A_id =  $t->departement_A_id;
+            $trajet->departement_D_id =  $t->departement_D_id;
+            $trajet->region_A_id =  $t->region_A_id;
+            $trajet->region_D_id =  $t->region_D_id;
+            $trajet->start =  $t->start;  
+            $trajet->started =  $t->started;  
+            $trajet->id =  $t->id;  
+            $trajet->endnotif =  $t->endnotif;  
+            $trajet->client_id =  $t->client_id;  
+            $trajet->chauffeur_id =  $t->chauffeur_id;  
+            $trajets [] = $trajet;    
+          }
+    
+
+        return [$trajets,Auth::user()];
+
     }
 
     /**
@@ -47,7 +77,9 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $t = Trajets::find($id);
+        $t->endnotif=1;
+        $t->update();
     }
 
     /**
