@@ -6,11 +6,19 @@
         $check = 0;
         $check1 = 0;
     @endphp
-    <div class="container">
+
+
+    <div class="container back">
         <div class="col-md-6">
             <a href="{{ route('dashboard') }}" class="btn btn-dark mt-3 mb-2" style="margin-left: 25.7% !important;">Retourner
                 au Dashboard</a>
         </div>
+
+        @if (count($tabAll[0]) == 0)
+        <div class="card-header mt-4 col-md-12 text-center  bg-secondary"
+        style="background-color: #920000 !important;">Il n'y a aucun trajet ! </div>
+        @else
+
         <div class="row">
             <div class="container col-6" style="height: 35rem;">
                 <div class="card-header text-white" style="background-color: rgb(201, 80, 0)">
@@ -137,10 +145,11 @@
 
                                                 </div>
                                             </div>
-                                            <div class="row ">
+                                            <div class="row ml-1">
                                                 <button type="button" data-toggle="modal"
                                                     onclick="loadTrajet({{ $trajet->id }})" data-target="#modifTrajet"
                                                     class="btn btn-primary mt-2">Modifier</button>
+
 
                                         </form>
                                         <form method="POST"
@@ -150,6 +159,8 @@
                                             {{ csrf_field() }}
                                             <button type="submit" class="btn btn-danger mt-2 ml-4">Supprimer</button>
                                         </form>
+                                    </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +302,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="row ">
+                                            <div class="row ml-1">
                                                 <button type="button" data-toggle="modal"
                                                     onclick="loadTrajet({{ $trajet->id }})" data-target="#modifTrajet"
                                                     class="btn btn-primary mt-2">Modifier</button>
@@ -305,26 +316,24 @@
                                             <button type="submit" class="btn btn-danger mt-2 ml-4">Supprimer</button>
                                         </form>
                                     </div>
+
+                                    </div>
                                 </div>
                             </div>
-                </div>
                 @endif
+
                 @endforeach
                 @if ($check1 == 0)
-                    <div class="card-header mt-4 col-md-12 text-center  bg-secondary"
-                        style="background-color: #7e0400 !important;">Il n'y a aucune course en cours ou non achevée !
-                    </div>
-                @endif
+                <div class="card-header mt-4 col-md-12 text-center  bg-secondary"
+                    style="background-color: #7e0400 !important;">Il n'y a aucune course  achevée !
+                </div>
+            @endif
             </div>
 
-        </div>
+      
+            </div>
 
-
-
-
-
-    </div>
-    </div>
+        @endif
 
 
 
@@ -335,6 +344,7 @@
 
 
 
+        @if (count($tabAll[0]) != 0)
 
     <!-- Modal -->
     <div class="modal fade" id="modifTrajet" tabindex="-1" role="dialog" aria-labelledby="modifTrajetLabel"
@@ -447,8 +457,7 @@
             </div>
         </div>
     </div>
-
-
+@endif
 
 
 @endsection

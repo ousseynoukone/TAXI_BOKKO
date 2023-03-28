@@ -8,7 +8,7 @@
     <link href="{{ asset('build/assets/style.css') }}" rel="stylesheet">
     <title>TAXI BOKO</title>
 </head>
-<body class="bg-dark">
+<body class="back">
     <div class="container text-color"  >
         @yield('content')
   
