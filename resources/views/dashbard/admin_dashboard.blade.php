@@ -4,6 +4,7 @@ if (Auth::check()) {
 
 $u  = Auth::user();
 $role = $u->roles[0]['description'];
+$vraiRole = $u->roles[0]['name'];
 
 }
 ?>
@@ -17,6 +18,9 @@ $role = $u->roles[0]['description'];
             {{ __("Statut : $role ") }}
         </h2>
         <a href="{{route('regions.index')}}" class="btn  btn-dark   col-md-4 offset-8 "  style="width: 15rem; color: #fcfcfc">CRUD Region/Departement</a>
+        @if($vraiRole=="superAdmin")
+        <a href="{{route('admins.create')}}" class="btn  btn-dark   col-md-4 offset-8 "  style="width: 15rem; color: #fcfcfc">Creer un  compte admin</a>
+        @endif
         <a href="{{route('users.index')}}" class="btn  btn-dark   col-md-4 offset-8 "  style="width: 15rem; color: #fcfcfc">Les Utilisateurs</a>
 
     </x-slot>
@@ -25,12 +29,12 @@ $role = $u->roles[0]['description'];
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="container" id="myMainContainer">
-                    <div  class="text-color card-header text-color  text-white text-center" style="background-color: #a35c00;""
+                    <div  class="text-color card-header text-color  text-white text-center" style="background-color: #C95000;"
                     >Ajouter un trajet</div>
                     <div class="row">
 
                                 <div class="col-md-4">
-                                    <div  class="text-color card-header text-white text-center" style="background-color: #a35c00">Lieu de depart</div>
+                                    <div  class="text-color card-header text-white text-center" style="background-color: #C95000">Lieu de depart</div>
                                     <div class="card-body">
                                         <form action="{{ route('trajets.store') }}" method="POST">
                                             @csrf
@@ -60,7 +64,7 @@ $role = $u->roles[0]['description'];
                                 </div>
 
                                 <div class="col-md-4  offset-4">
-                                    <div  class=" text-color card-header text-white text-center" style="background-color: #a35c00">Lieu de d'arrivé</div>
+                                    <div  class=" text-color card-header text-white text-center" style="background-color: #C95000">Lieu de d'arrivé</div>
 
                                     <div class="form-group mt-3 text-color">
                                         <label for="region">Sélectionnez une région :</label>

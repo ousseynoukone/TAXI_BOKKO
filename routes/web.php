@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChauffeurController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CreateAdminController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JsController;
@@ -36,12 +37,21 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 
-Route::group(['middleware' => ['auth','role:admin']], function() { 
+Route::group(['middleware' => ['auth', 'role:admin|superAdmin']], function() { 
     Route::resource('trajets',TrajetController::class);
     Route::resource('departements',DepartmentController::class);
     Route::resource('regions',RegionController::class);
     Route::resource('js',JsController::class);
     Route::resource('users',UserController::class);
+
+
+    
+
+});
+
+Route::group(['middleware' => ['auth','role:superAdmin']], function() { 
+ 
+    Route::resource('admins', 'App\Http\Controllers\Auth\CreateAdminController');
 });
 
 

@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         }
         
-        else if (Auth::user()->hasRole('admin'))
+        else if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('superAdmin') )
         {
             $regions = Region::all(); 
             return view('dashbard.admin_dashboard',compact('regions'));

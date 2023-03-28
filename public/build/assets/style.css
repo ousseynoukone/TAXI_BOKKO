@@ -1,6 +1,6 @@
 div#dashcolor {
 
-    background-color: #ffac3c !important ;
+    background-color: #ffac3c    !important ;
     border-radius: 1em;  
     
 }
@@ -68,19 +68,21 @@ div#dashcolor {
 
 
 #myMainContainer{
-    background-color: #502d00;
+    background-color: #001947;
+    
 }
 
 #myMainContainer1{
-    background-color: #000820;
+    background-color: #001947;
+
 }
 
 .btn{
-    background-color: #a35c00;
+    background-color: #C95000;
 
 }
 .card{
-    background-color: #020d3d;
+    background-color: #000820;
 
 }
 .text-color{
@@ -88,24 +90,43 @@ div#dashcolor {
 }
 
 #stylebtn{
-    background-color: #a35c00;
+    background-color: #C95000;
+
+}
+#stylebtn:hover{
+    background-color:#050e2b;
 
 }
 
 .btn:hover{
-    background-color:#C95000;
+    background-color:#050e2b;
 
 }
 
 
 
 #btnMotal:hover{
-    background-color:#05004e !important;
+    background-color:#050e2b !important;
     color:white !important;
 
 }
 
 #btnMotal{
-    color:#05004e !important;;
+    color:#020d2e !important;;
 
 }
+
+.back{
+    background-color: #001947 !important;
+}
+
+.front{
+    background-color: #C95000  !important;
+
+}
+
+.drop:hover{
+    background-color: #C95000  !important;
+
+}
+

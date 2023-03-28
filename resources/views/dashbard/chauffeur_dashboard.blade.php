@@ -16,14 +16,17 @@ if (Auth::check()) {
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="card-header card font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="back card-header card font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("Bienvenue :  $u->prenom $u->nom ") }}
         </h2>
-        <h2 class="card-header card text-center font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="back card-header card text-center font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __("Statut : $role ") }}
         </h2>
-        <h6 class="card-header text-color card text-center" >
+        <h6 class="back card-header text-color card text-center" >
             {{ __("Marque de la voiture :  $u->voiture") }}
+        </h6>
+        <h6 class="front card-header text-color card text-center" >
+            
         </h6>
     </x-slot>
     <input type="text" hidden id="check" value="1"> 
@@ -83,12 +86,12 @@ if (Auth::check()) {
 
                         <div class="container col-md-6" >
                             @if (count($tjs) == 0)
-                            <div class="card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                style="background-color: #a35c00 !important;">Il n'y a aucun trajet disponible
+                            <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
+                                >Il n'y a aucun trajet disponible
                             </div>
                         @else
-                            <div class="card-header mt-4  col-md-12 text-color text-center"
-                                style="background-color: #a35c00 !important;">Trajet(s) selectionée(s)</div>
+                            <div class="front card-header mt-4  col-md-12 text-color text-center"
+                                >Trajet(s) selectionée(s)</div>
                         @endif
                         @foreach ($tjs as $trajet)
                         @if($trajet->chauffeur_id == $u->id)
@@ -261,12 +264,12 @@ if (Auth::check()) {
                             <div class="container col-md-6" >
                             
                             @if (count($tjs) == 0)
-                                <div class="card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                    style="background-color: #a35c00 !important;">Il n'y a aucun trajet disponible
+                                <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
+                                   >Il n'y a aucun trajet disponible
                                 </div>
                             @else
-                                <div class="card-header mt-4  col-md-12 text-color text-center"
-                                    style="background-color: #a35c00 !important;">Liste des trajets (Choisir une course) </div>
+                                <div class="front card-header mt-4  col-md-12 text-color text-center"
+                                   >Liste des trajets (Choisir une course) </div>
                             @endif
                             @foreach ($tjs as $trajet)
                             @if($trajet->chauffeur_id!=$u->id)

@@ -51,8 +51,8 @@
 
                   
                     </ol>
-                    <div class="card-header mt-3 alert alert-warning">Information Admin : 
-                        <div class="alert alert-danger" role="alert">Email : admin@admin.com</div>
+                    <div class="card-header mt-3 alert alert-warning">Information Super Administrateur : 
+                        <div class="alert alert-danger" role="alert">Email : superadmin@admin.com</div>
                         <div class="alert alert-danger" role="alert">mots de passe : passer123</div>
                     </div>
                 </div>

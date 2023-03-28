@@ -1,5 +1,11 @@
 @extends('layouts.app1')
+@php
+    if (Auth::check()) {
 
+$u  = Auth::user();
+
+}
+@endphp
 @section('content')
     <div class="container  mt-5">
         <a href="{{ route('dashboard') }}" class="btn  btn-dark   col-md-4 offset-8 "
@@ -112,5 +118,35 @@
             </div>
 
         </div>
+@if ($u->hasRole('superAdmin'))
+    
+        <div class="col-md-12 mt-4 " style="height: 10rem; overflow: auto;">
+            <div class="card">
+
+                <div class="card-header h5">Super Administrateurs</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tabAll[3] as $admin)
+                            <tr>
+                                <td>{{ $admin->prenom }}</td>
+                                <td>{{ $admin->nom }}</td>
+                                <td>{{ $admin->email }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
     </div>
+    @endif
+
 @endsection

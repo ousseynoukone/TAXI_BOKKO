@@ -14,12 +14,12 @@ class InsertAdminSeeders extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'prenom' => "Admin",
-            'nom' => "ADMIN",
+            'prenom' => "Super",
+            'nom' => "Admin",
             'genre' =>'Homme',
-            'email' => 'admin@admin.com',
+            'email' => 'superadmin@admin.com',
             'password' => Hash::make('passer123'),
         ]);
-        $user->attachRole('admin');
+        $user->attachRole('superAdmin');
     }
 }

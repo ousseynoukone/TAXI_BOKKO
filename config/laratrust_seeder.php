@@ -12,10 +12,16 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
+        'superAdmin' => [
+            'users' => 'c,r,u,d',
+            'chauffeur' => 'c,r,u,d',
+            'admin' => 'c,r,u,d',
+        ],
         'admin' => [
             'users' => 'c,r,u,d',
             'chauffeur' => 'c,r,u,d',
             'admin' => 'c,r,u,d',
+
         ],
         'chauffeur' => [
             'users' => 'r',

@@ -17,22 +17,35 @@ class UserController extends Controller
         $u = User::all();
         $tabClient = array();
         $tabAdmin = array();
+        $tabSuperAdmin = array();
         $tabChauffeur = array();
         
         foreach ($u  as $utilisateur) {
             if ($utilisateur->hasrole('admin')) {
                 $tabAdmin[] = $utilisateur;
-            } elseif ($utilisateur->hasRole('chauffeur')) {
+            } 
+
+            if ($utilisateur->hasRole('chauffeur')) {
                 $tabChauffeur[] = $utilisateur;
-            } elseif ($utilisateur->hasRole('client')) {
+            } 
+
+            if ($utilisateur->hasRole('client')) {
                 $tabClient[] = $utilisateur;
             }
+
+            if ($utilisateur->hasRole('superAdmin')) {
+                $tabSuperAdmin[] = $utilisateur;
+
+            }
+            
         }
         $tabAll = [
             $tabClient,
             $tabAdmin,
-            $tabChauffeur
+            $tabChauffeur,
+            $tabSuperAdmin
         ];
+     
         
         
     
