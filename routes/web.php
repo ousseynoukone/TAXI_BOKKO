@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth','role:superAdmin']], function() {
 
 Route::group(['middleware' => ['auth','role:chauffeur']], function() { 
     Route::resource('chauffeurs',ChauffeurController::class);
+    Route::get('chauffeurs\cancel\{id}', 'App\Http\Controllers\ChauffeurController@cancel')->name('chaffeurs.cancel');
+
 
 });
 

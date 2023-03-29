@@ -67,9 +67,20 @@ class ChauffeurController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request )
+    {   
+  
+    }
+
+    public function cancel($id )
+    {   
+        $trajet = Trajets::find($id);
+
+        $trajet->chauffeur_id=null;
+        $trajet->update();
+        toastr()->warning('Course annulée ! ', 'Succès !');
+        return (redirect()->route('chauffeurs.index'));
+
     }
 
     /**

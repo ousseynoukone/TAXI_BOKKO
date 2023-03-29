@@ -221,6 +221,15 @@ if (Auth::check()) {
                                             @endif
 
                                         </form>
+
+                                        <form method="get" action="{{ route('chaffeurs.cancel', $trajet->id) }}">
+                                            @if ($trajet->start==0 && $trajet->started==0 && $trajet->client_id==null)
+                                                
+                                        <button type="submit"
+                                        class="btn btn-warning text-color mt-3  ml-3">Annuler</button>
+                                            @endif
+
+                                        </form>
                                       
                                         
                                         <form method="get" action="{{ route('chauffeurs.edit', $trajet->id) }}">
