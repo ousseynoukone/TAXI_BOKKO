@@ -647,12 +647,15 @@ function loadTrajet(id) {
             type: 'GET',
             dataType: 'html',
             success: function(response) {
-                var myMainContainer1Contenu = $(response).find('#myMainContainer1').html();
-                $('#myMainContainer1').html(myMainContainer1Contenu);
+                var Tocharge1 = $(response).find('#Tocharge1').html();
+                $('#Tocharge1').html(Tocharge1);
+
+                var Tocharge2 = $(response).find('#Tocharge2').html();
+                $('#Tocharge2').html(Tocharge2);
 
             }
         });
-    }, 3000);
+    }, 4000);
     
 });
 

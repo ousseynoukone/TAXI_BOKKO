@@ -68,31 +68,22 @@ if (Auth::check()) {
 
                     
 
-                  
-
-
-
-
-
-
-
-
-
-
 
 
 
                     <div class="row">
 
-                        <div class="container col-md-6" >
+                        <div class="container col-md-6" style="height: 40rem; overflow-y: scroll;">
                             @if (count($tjs) == 0)
                             <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                >Il n'y a aucun trajet disponible
+                            style="position: sticky; top: 0; z-index:1;"  >Aucun trajet disponible
                             </div>
                         @else
-                            <div class="front card-header mt-4  col-md-12 text-color text-center"
-                                >Trajet(s) selectionée(s)</div>
+                            <div class="front card-header col-md-12 text-color text-center"
+                            style="position: sticky; top: 0; z-index:1;" >Trajet(s) selectionée(s)</div>
                         @endif
+                            <div class="container " id="Tocharge1">
+
                         @foreach ($tjs as $trajet)
                         @if($trajet->chauffeur_id == $u->id)
                         @php $check1 = true ; @endphp
@@ -261,16 +252,18 @@ if (Auth::check()) {
                     Aucune course disponible  </div>
                     @endif
                         </div>
-                            <div class="container col-md-6" >
-                            
-                            @if (count($tjs) == 0)
+                        </div>
+                            <div class="container col-md-6" style="height: 40rem; overflow-y: scroll;" >
+                                @if (count($tjs) == 0)
                                 <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                   >Il n'y a aucun trajet disponible
+                                style="position: sticky; top: 0; z-index:1;"  >Aucun trajet disponible
                                 </div>
                             @else
-                                <div class="front card-header mt-4  col-md-12 text-color text-center"
-                                   >Liste des trajets (Choisir une course) </div>
+                                <div class="front card-header col-md-12 text-color text-center"
+                                style="position: sticky; top: 0; z-index:1;" >Liste des trajets (Choisir une course)</div>
                             @endif
+                                <div class="container " id="Tocharge2">
+
                             @foreach ($tjs as $trajet)
                             @if($trajet->chauffeur_id!=$u->id)
                             @php $check=true; @endphp
@@ -440,7 +433,8 @@ if (Auth::check()) {
                                         </div>
                                     </div>
                                 </div>
-                        </div>
+                            </div>
+                        
                         @endif
                         @endforeach
                         @if( $check==false)

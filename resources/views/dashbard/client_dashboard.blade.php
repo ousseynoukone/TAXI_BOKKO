@@ -78,16 +78,19 @@ if (Auth::check()) {
 
 
                     <div class="row ">
-                        <div class="container col-md-6"  >
-                            
+                        <div class="container col-md-6" style="height: 40rem; overflow-y: scroll;" >
                             @if (count($tjs) == 0)
-                                <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                    >Aucun trajet disponible
-                                </div>
-                            @else
-                                <div class="front card-header col-md-12 text-color text-center"
-                                    >Trajet(s) selectionée(s)</div>
-                            @endif
+                            <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
+                            style="position: sticky; top: 0; z-index:1;"  >Aucun trajet disponible
+                            </div>
+                        @else
+                            <div class="front card-header col-md-12 text-color text-center"
+                            style="position: sticky; top: 0; z-index:1;" >Trajet(s) selectionée(s)</div>
+                        @endif
+                            <div class="container " id="Tocharge1">
+
+                            
+                       
                             @foreach ($tjs as $trajet)
                                 @if ($trajet->client_id == $u->id)
                                     @php $check1 = true ; @endphp
@@ -232,18 +235,21 @@ if (Auth::check()) {
             ">
                                 Aucune course selectionnée </div>
                         @endif
+                        </div>
                     </div>
 
-                    <div class="container col-md-6 ">
-
+                    <div class="container col-md-6 "  style="height: 40rem; overflow-y: scroll;"    >
                         @if (count($tjs) == 0)
-                            <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
-                                >Il n'y a aucun trajet disponible
-                            </div>
-                        @else
-                            <div  class="front card-header col-md-12 text-color text-center"
-                                >Liste des trajets </div>
-                        @endif
+                        <div class="front card-header mt-4 col-md-12 text-center text-color bg-secondary"
+                        style="position: sticky; top: 0; z-index:1;"  >Aucun trajet disponible
+                        </div>
+                    @else
+                        <div class="front card-header col-md-12 text-color text-center"
+                        style="position: sticky; top: 0; z-index:1;" >Liste des trajets</div>
+                    @endif
+                        <div class="container " id="Tocharge2">
+
+                    
                         @foreach ($tjs as $trajet)
                             @if ($trajet->client_id != $u->id)
                                 @php $check=true;  @endphp
@@ -382,13 +388,13 @@ if (Auth::check()) {
                                 </div>
                             </div>
                         </div>
-            </div>
+                    </div>
             @endif
             @endforeach
+        </div>
 
         </div>
     </div>
-</div>
 </div>
 </div>
 </x-app-layout>

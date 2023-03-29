@@ -43,11 +43,10 @@ Route::group(['middleware' => ['auth', 'role:admin|superAdmin']], function() {
     Route::resource('regions',RegionController::class);
     Route::resource('js',JsController::class);
     Route::resource('users',UserController::class);
-
-
     
-
 });
+
+
 
 Route::group(['middleware' => ['auth','role:superAdmin']], function() { 
  
